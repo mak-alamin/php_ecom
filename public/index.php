@@ -5,7 +5,7 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 use APP\Core\Application;
 use APP\Controllers\PageController;
 use APP\Controllers\AdminController;
-use APP\Controllers\RegisterController;
+use APP\Controllers\UserController;
 
 $protocol = isset( $_SERVER['HTTPS']) ? 'https://' : 'http://';
 
@@ -40,11 +40,11 @@ $route->get('/services', [PageController::class, 'service']);
 $route->get('/contact', [PageController::class, 'contact']);
 $route->post('/contact', [PageController::class, 'handleContact']);
 
-$route->get('/register', [RegisterController::class, 'register']);
-$route->post('/register', [RegisterController::class, 'register']);
+$route->get('/register', [UserController::class, 'register']);
+$route->post('/register', [UserController::class, 'register']);
 
-$route->get('/login', [RegisterController::class, 'login']);
-$route->post('/login', [RegisterController::class, 'login']);
+$route->get('/login', [UserController::class, 'login']);
+$route->post('/login', [UserController::class, 'login']);
 
 $route->get('/admin', [AdminController::class, 'index']);
 

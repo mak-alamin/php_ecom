@@ -5,9 +5,9 @@ namespace APP\Controllers;
 session_start();
 
 use APP\Core\Controller;
-use APP\Models\RegisterModel;
+use APP\Models\UserModel;
 
-class RegisterController extends Controller{
+class UserController extends Controller{
     public array $message = [];
 
     public function register()
@@ -28,7 +28,7 @@ class RegisterController extends Controller{
                     'password' => $_POST['password'],
                 ];
                 
-                $model = new RegisterModel();
+                $model = new UserModel();
                 
                 $inserted =  $model->insertData('users', $data);
 
@@ -68,7 +68,7 @@ class RegisterController extends Controller{
             $email = $_POST['email'];
             $password = $_POST['password'];
 
-            $model = new RegisterModel();
+            $model = new UserModel();
             
             $data = $model->getData('users', "email='$email'");
 

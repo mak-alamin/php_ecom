@@ -19,15 +19,20 @@ class Database{
         }
     }
 
+    public function createTable( string $tableName, string $columns){
+        $sql = "CREATE TABLE IF NOT EXISTS $tableName ( $columns );";
+        $this->pdo->exec($sql);
+    }
+
+    public function dropTable(string $tableName){
+        $sql = "DROP TABLE $tableName;";
+        $this->pdo->exec($sql);
+    }
+
     public function query($sql): bool
     {
-        // echo $sql;
-        // die();
-
         $this->stmt = $this->pdo->prepare($sql);
-        $notice = $this->stmt->execute();
-
-        return $notice;
+        return $this->stmt->execute();
     }
 
 
@@ -36,9 +41,7 @@ class Database{
         $this->stmt = $this->pdo->prepare($sql);
         $this->stmt->execute();
 
-        $data = $this->stmt->fetchAll(\PDO::FETCH_ASSOC);
-
-        return $data;
+        return $this->stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function applyMigrations()
@@ -63,7 +66,7 @@ class Database{
 
             $instance = new $className();
 
-            $this->Log('Initializing Migration ' . $migration);
+            $this->Log( 'Applying Migration ' . $migration);
 
             $instance->up();
 
