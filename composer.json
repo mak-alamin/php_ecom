@@ -11,10 +11,10 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "APP\\" : "./"
+            "APP\\" : "src/"
         },
 
-        "files": ["Core/functions.php"]
+        "files": ["src/Core/functions.php"]
 
     }
 }

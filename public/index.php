@@ -2,19 +2,18 @@
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-use APP\Core\Application;
-use APP\Controllers\PageController;
 use APP\Controllers\AdminController;
+use APP\Controllers\PageController;
 use APP\Controllers\UserController;
+use APP\Core\Application;
 
-$protocol = isset( $_SERVER['HTTPS']) ? 'https://' : 'http://';
+$protocol = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
 
-//Define Constants
-const PROJECT_DIR = 'php_ecom';
-define('ROOT_DIR', dirname(__DIR__) );
-define('ROOT_URI', $protocol . $_SERVER['HTTP_HOST'] . '/' . PROJECT_DIR );
+
+define("PROJECT_DIR", basename(dirname(__DIR__)));
+define('ROOT_DIR', dirname(__DIR__));
+define('ROOT_URI', $protocol . $_SERVER['HTTP_HOST'] . '/' . PROJECT_DIR);
 const APP_ASSETS = ROOT_URI . '/public/assets';
-
 
 //Config
 $db_config = [
@@ -29,7 +28,6 @@ $app = new Application($db_config, ROOT_DIR);
 
 //Router Instance
 $route = $app->router;
-
 
 //Your Routes
 $route->get('/', 'home');
@@ -47,7 +45,6 @@ $route->get('/login', [UserController::class, 'login']);
 $route->post('/login', [UserController::class, 'login']);
 
 $route->get('/admin', [AdminController::class, 'index']);
-
 
 //Kick Off
 $app->run();
